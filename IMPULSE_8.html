@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f8ff"><title>IMPULSE · Рабочий прототип 8</title>
+<style>
+:root{--ink:#142343;--muted:#7886a4;--line:#e6ecf5;--bg:#f5f7fc;--blue:#3563ed;--purple:#7468e9;--cyan:#39cce5;--green:#00b68b;--white:#fff;--shadow:0 14px 45px rgba(38,65,119,.085)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:#e9edf7;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #96aaff;outline-offset:2px}.app{width:min(100%,480px);min-height:100dvh;margin:auto;background:var(--bg);padding-bottom:calc(90px + env(safe-area-inset-bottom,0px));position:relative;box-shadow:0 0 50px rgba(20,34,62,.08)}
+.top{padding:27px 22px 10px;background:linear-gradient(163deg,#fff 0%,#f5f8ff 78%,#f5f7fc 100%)}.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,#5276fa,#8059df);display:grid;place-items:center;color:white;box-shadow:0 8px 19px #546de73b}.logo svg{width:26px;height:26px}.brandname{font-weight:900;letter-spacing:1.9px;font-size:17px;line-height:1}.brandtiny{font-size:10px;letter-spacing:.35px;margin-top:4px;color:var(--muted);font-weight:650}.round{border:1px solid var(--line);border-radius:13px;background:#fff;color:#506183;width:42px;height:42px;display:grid;place-items:center}.round svg{width:20px;height:20px}.section{padding:0 19px}.eyebrow{font-size:12px;color:var(--muted);font-weight:650;margin-top:28px}.heading{font-size:27px;letter-spacing:-.75px;font-weight:850;margin:6px 0 4px}.subtitle{font-size:13px;color:var(--muted);line-height:1.5;margin:0}.demo{display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:#7862aa;background:#efeafa;font-size:10px;line-height:1.2;padding:7px 10px;border-radius:30px;font-weight:800}.demo:before{content:"";width:6px;height:6px;border-radius:50%;background:#9f82db}.hero{background:linear-gradient(125deg,#234bd2 0%,#5963e8 58%,#8b69ee 100%);border-radius:24px;color:white;margin-top:23px;padding:22px 20px;min-height:185px;position:relative;overflow:hidden;box-shadow:0 18px 31px #5068c633}.hero:before{content:"";width:170px;height:170px;border:1px solid #ffffff30;border-radius:50%;position:absolute;right:-35px;top:-64px;box-shadow:0 0 0 33px #ffffff0d,0 0 0 65px #ffffff08}.spark{position:absolute;right:20px;top:26px;width:67px;height:67px;display:grid;place-items:center;background:#ffffff1e;border:1px solid #ffffff35;border-radius:20px;transform:rotate(10deg)}.spark svg{width:36px;height:36px;transform:rotate(-10deg)}.hero .tag{font-weight:700;font-size:11px;letter-spacing:.7px;color:#c7f1ff}.hero h2{font-size:23px;letter-spacing:-.5px;line-height:1.2;margin:13px 0 8px;max-width:265px}.hero p{font-size:12px;color:#e0e9ff;max-width:250px;line-height:1.48;margin:0}.herobtn{display:flex;align-items:center;gap:7px;background:#fff;border:0;color:#3151ca;font-weight:800;font-size:12px;padding:12px 15px;border-radius:12px;margin-top:18px}.herobtn svg{width:16px;height:16px}.sectiontitle{display:flex;align-items:center;justify-content:space-between;margin:24px 0 13px}.sectiontitle h3{font-size:16px;font-weight:800;letter-spacing:-.2px;margin:0}.smalllink{border:none;background:transparent;color:var(--blue);font-size:12px;font-weight:700;padding:5px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.metric{border:1px solid #e8edf7;background:white;border-radius:18px;padding:15px 11px 13px;min-height:122px;box-shadow:0 5px 18px #384e7b08}.metricicon{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;background:#eaf0ff;color:#466ae3}.metricicon svg{width:16px;height:16px}.metric:nth-child(2) .metricicon{background:#eeebff;color:#7660d7}.metric:nth-child(3) .metricicon{background:#e5f9f5;color:#00aa91}.metricnum{font-size:25px;font-weight:850;line-height:1.12;margin-top:9px;letter-spacing:-.5px}.metriclabel{color:var(--muted);font-weight:600;font-size:10px;line-height:1.25;margin-top:6px}.card{background:#fff;border:1px solid #e8edf5;border-radius:19px;box-shadow:0 5px 20px #384e7b08}.chatpeek{padding:14px 15px}.row{display:flex;align-items:center;gap:11px}.avatar{width:39px;height:39px;flex:none;border-radius:14px;display:grid;place-items:center;font-weight:850;font-size:15px;color:#fff;background:linear-gradient(135deg,#f5acac,#e678aa)}.avatar.lilac{background:linear-gradient(135deg,#b7a0fa,#7c73d2)}.avatar.mint{background:linear-gradient(135deg,#6ce1c7,#36a99f)}.avatar.blue{background:linear-gradient(135deg,#85befc,#6380e8)}.rowmain{min-width:0;flex:1}.rowtitle{font-size:13px;font-weight:800;margin:0}.rowdesc{font-size:11px;color:var(--muted);margin:5px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.time{font-size:10px;color:#96a1b9;align-self:flex-start;margin-top:3px}.greenpill{background:#ddfbf1;color:#008f6e;border-radius:30px;padding:5px 8px;font-weight:800;font-size:9px;white-space:nowrap}.answer{background:#f2f6ff;border:1px solid #e3eaff;border-radius:14px;padding:13px 13px 12px;margin-top:13px}.answertitle{color:#4669d9;font-weight:800;font-size:10px;display:flex;align-items:center;gap:6px;margin-bottom:6px}.answertitle svg{width:14px;height:14px}.answertext{font-size:12px;line-height:1.55;color:#415274;margin:0}.actions{display:flex;gap:8px;margin-top:12px}.primary{border:none;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:12px 15px}.secondary{border:1px solid #dfe7f5;border-radius:12px;background:#fff;color:#3d5bd0;font-size:12px;font-weight:750;padding:11px 13px}.note{font-size:10px;color:#8b96ac;line-height:1.5;margin:13px 0 0}.statusrow{margin-top:17px;display:flex;gap:10px;align-items:center;border:1px dashed #d8e2f2;background:#ffffffa8;border-radius:16px;padding:12px 13px}.wa{background:#def9ea;color:#12aa68;border-radius:11px;height:36px;width:36px;display:grid;place-items:center;flex:none}.wa svg{width:19px;height:19px}.statusrow strong{font-size:12px}.statusrow p{margin:3px 0 0;font-size:10px;color:var(--muted)}.soon{margin-left:auto;flex:none;padding:6px 8px;background:#fff4df;border-radius:20px;color:#ac771c;font-size:10px;font-weight:750}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);display:grid;grid-template-columns:repeat(5,1fr);height:calc(74px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:#ffffffed;backdrop-filter:blur(15px);border-top:1px solid #e5eaf5;z-index:20}.tab{border:0;background:transparent;color:#98a4ba;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:9px;font-weight:800}.tab svg{width:22px;height:22px;stroke-width:1.9}.tab.active{color:#4567e9}.tab.active .tabicon{background:#edf1ff;border-radius:12px}.tabicon{display:grid;place-items:center;width:42px;height:34px}.pane{display:none}.pane.active{display:block}.pagehead{padding:24px 19px 6px}.pagehead h1{font-size:26px;letter-spacing:-.7px;margin:0 0 6px}.pagehead p{font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.5}.item{padding:14px 13px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #edf1f7;cursor:pointer}.item:last-child{border-bottom:0}.item:hover{background:#fafbff}.listbox{overflow:hidden}.unread{background:#e9efff;color:#4b69ea;font-size:10px;border-radius:9px;padding:4px 7px;font-weight:850;align-self:center}.pill{font-size:10px;border-radius:9px;padding:5px 8px;background:#edf3ff;color:#4669e3;font-weight:750}.formrow{margin-top:13px}.formrow label{display:block;font-size:11px;color:#526382;font-weight:750;margin:0 0 6px}.input{width:100%;padding:13px;background:#fff;border:1px solid #dfe7f2;border-radius:12px;color:var(--ink);font-size:13px;outline:0}.full{width:100%;margin-top:13px}.slot{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.slot button{background:white;border:1px solid #dce5f5;color:#476081;border-radius:11px;padding:11px 13px;font-size:12px;font-weight:750}.slot button.chosen{background:#ebf0ff;border-color:#5b78ed;color:#365adc}.sched{display:flex;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #eaf0f6}.sched:last-child{border-bottom:none}.clock{background:#edf2ff;color:#4766db;border-radius:12px;padding:9px 7px;font-size:12px;font-weight:850;width:58px;text-align:center}.clientstats{display:flex;gap:9px;margin:15px 0}.clientstats .card{flex:1;padding:15px}.clientstats strong{font-size:20px}.clientstats p{font-size:10px;color:var(--muted);margin:5px 0 0}.aicard{background:linear-gradient(130deg,#252c70,#4959ba 70%,#7970e9);border-radius:22px;padding:20px;color:#fff}.aicard h2{font-size:21px;margin:6px 0}.aicard p{font-size:12px;color:#dfebff;line-height:1.55}.scen{padding:16px 15px;margin-top:11px;display:flex;gap:12px;align-items:center}.scen .metricicon{width:40px;height:40px;flex:none}.scen strong{font-size:13px}.scen p{font-size:11px;color:var(--muted);margin:4px 0}.scen button{margin-left:auto}.overlay{display:none;position:fixed;inset:0;background:#17254981;align-items:flex-end;justify-content:center;z-index:30;padding:12px}.overlay.open{display:flex}.modal{width:min(100%,470px);background:#fff;border-radius:25px;padding:18px 18px calc(26px + env(safe-area-inset-bottom,0px));max-height:88dvh;overflow:auto;box-shadow:0 20px 70px #0003}.modalbar{display:flex;align-items:center;justify-content:space-between;gap:10px}.modalbar h2{font-size:19px;margin:4px 0 15px}.close{border:0;border-radius:10px;background:#f0f2fa;color:#49607f;width:32px;height:32px;font-weight:800}.bubble{border-radius:14px;padding:12px;font-size:12px;line-height:1.5;margin:10px 0;max-width:87%}.bubble.in{background:#edf1f7;color:#35435c}.bubble.out{background:#e9f0ff;color:#3656ba;margin-left:auto}.bubble.ai{border:1px solid #bccbf9;background:#f5f7ff;margin-left:auto}.bubble b{display:block;color:#4e66c2;margin-bottom:4px;font-size:10px}.modalfoot{font-size:11px;color:#7b87a1;padding:8px 0}.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#1f3159;color:white;padding:12px 16px;border-radius:12px;font-size:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;z-index:40;transition:opacity .2s;text-align:center;max-width:90%;width:max-content}.toast.show{opacity:1}.tiny{font-size:11px;color:var(--muted);line-height:1.6}svg{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2} .ic{width:18px;height:18px}.hidden{display:none!important}
+@media(max-width:350px){.heading{font-size:24px}.hero h2{font-size:21px}.section{padding:0 13px}.metric{padding:12px 8px}.metriclabel{font-size:9px}.top{padding:18px 16px 10px}}@media(min-width:600px){body{padding:25px 0}.app{border-radius:28px;overflow:hidden;min-height:900px}.bottom{bottom:0}}
+
+/* Price settings - mobile first */
+.settings-highlight{margin-top:20px;background:linear-gradient(120deg,#eef3ff,#f4efff);border:1px solid #dce5ff;border-radius:20px;padding:17px;display:flex;align-items:center;gap:10px}
+.settings-highlight strong{display:block;font-size:14px;line-height:1.35}.settings-highlight p{margin:5px 0 0;color:#7181a1;font-size:11px;line-height:1.45}
+.settings-highlight button{flex:none}.pricetip{background:#e9f7ff;border:1px solid #cdeafb;border-radius:15px;padding:14px;font-size:12px;line-height:1.55;color:#355677;margin-bottom:14px}
+.price-row{padding:13px 12px;margin:9px 0;background:#fff;border:1px solid #e6edf7;border-radius:16px}
+.price-grid{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:10px;align-items:end}
+.price-grid .formrow{margin:0}.price-grid input{font-size:15px;font-weight:650}
+.price-input-wrap{position:relative}.price-input-wrap .input{padding-right:32px}.price-input-wrap span{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:800;color:#657ca1}
+.price-row .del{display:block;background:transparent;border:0;color:#bd4c5e;font-size:11px;padding:9px 3px 2px;margin-left:auto}
+.settings-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:14px}.settings-actions .full{margin-top:0}.secondary.full{width:100%}
+#settingsStatus{font-size:11px;line-height:1.45;color:#7181a1;margin:12px 0 0}
+.formwarning{color:#b34a52!important}#pane-prices{padding-bottom:20px}
+#pane-business{padding-bottom:25px}#businessStatus{margin-top:18px}.settings-highlight .secondary{padding:11px 9px}.settings-highlight .primary{padding:12px 10px}
+.remove-appt{border:0;background:#fff3f3;color:#c34d61;border-radius:9px;padding:8px 9px;font-size:11px;font-weight:750}
+ .generated-client{background:#fbfcff}.generated-client .pill{background:#e6faf2;color:#09906c}.sched .rowmain{min-width:0}.sched .rowdesc{white-space:normal;overflow-wrap:anywhere}.brandname{letter-spacing:2.2px}
+@media(max-width:365px){.settings-highlight{flex-wrap:wrap}.settings-highlight div:first-child{flex-basis:100%}}
+
+/* IMPULSE 5: tappable client cards, appointment actions and history */
+.item[data-client],.sched[data-appt]{cursor:pointer;transition:background .16s}.item[data-client]:active,.sched[data-appt]:active{background:#eef3ff}
+.client-arrow{font-size:19px;color:#a5afc1;margin-left:5px}.hist{margin-top:12px}.hist-row{padding:11px 0;border-bottom:1px solid #edf1f7;display:flex;align-items:center;gap:9px}.hist-row:last-child{border-bottom:0}.hist-row .rowmain{min-width:0}.hist-time{flex:none;min-width:52px;text-align:center;border-radius:9px;background:#edf2ff;color:#4766db;padding:9px 6px;font-weight:850;font-size:12px}.hist .pill{max-width:94px;text-align:center;font-size:9px}.pill.cancelled{background:#fff0f0;color:#ba5666}.pill.done{background:#e6faf3;color:#128866}
+.modal .formrow label{font-size:12px}.modal .input{font-size:15px}.modal textarea.input{resize:vertical;min-height:94px}.modal .sectiontitle{margin:16px 0 8px}.modalfoot{line-height:1.55}.inputhelp{font-size:11px;color:#7c8ba5;line-height:1.5;margin:7px 0 0}
+.modal-actions{display:flex;gap:9px;align-items:center;margin-top:12px}.modal-actions button{flex:1}.danger{border:1px solid #f5c5cc;background:#fff0f2;color:#b94356;border-radius:12px;padding:11px 12px;font-size:12px;font-weight:800}.recordmeta{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.recordmeta .pill{font-size:11px}.alertbox{background:#fff5f3;color:#994c58;border:1px solid #f4d2d4;padding:13px;border-radius:13px;margin-top:12px;font-size:12px;line-height:1.6}.client-card-supp{font-size:11px;color:#8390a8;line-height:1.6;margin:4px 0 0}
+@media(max-width:350px){.modal-actions{flex-wrap:wrap}.modal-actions button{min-width:100%}}
+
+/* IMPULSE 6: date-aware schedule, time selection and collisions */
+.home-date{font-size:11px;white-space:nowrap;color:#6b7fa8;font-weight:700}
+.cal-card{padding:15px 10px 12px;margin:3px 0 17px}
+.cal-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 5px 13px}.cal-heading{font-size:15px;font-weight:850;color:#263a6a}.cal-arrow{font-size:25px;line-height:1;background:#eff3ff;color:#3b60d6;border:0;border-radius:11px;width:34px;height:33px;display:grid;place-items:center}
+.week-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}.day{min-width:0;border:1px solid transparent;background:#f7f9ff;color:#6c7b98;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 1px;gap:5px}.day .dow{font-size:10px;font-weight:800}.day .daynum{font-size:15px;font-weight:800}.day .daydot{height:5px;width:5px;border-radius:50%;background:transparent}.day.has-bookings .daydot{background:#7993ee}.day.is-today:not(.selected){border-color:#97b9f1;background:white}.day.selected{color:white;background:linear-gradient(135deg,#3159e2,#7465e7);box-shadow:0 6px 14px #5570c538}.day.selected .daydot{background:white}
+.date-jump{display:flex;align-items:center;gap:8px;margin-top:13px;padding:11px 5px 0;border-top:1px solid #eff2f8}.date-jump label{font-size:11px;white-space:nowrap;color:#687995;font-weight:750}.date-jump input{min-width:0;flex:1;max-width:165px;border:1px solid #e3e9f6;border-radius:10px;padding:8px 6px;background:#fff;color:#284068;font-size:12px}.date-jump button{margin-left:auto}
+.availability-label{font-size:12px;font-weight:800;color:#35466c;margin:15px 0 8px}.time-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px}.time-option{border:1px solid #d9e5f7;background:#f8faff;border-radius:11px;color:#3764bc;font-weight:800;font-size:12px;min-height:36px;padding:9px 2px}.time-option.chosen{background:#3d62e6;color:white;border-color:#3d62e6}.time-option:disabled{background:#f2f4f8;color:#aab3c2;border-color:#eef0f4;text-decoration:line-through;cursor:not-allowed}
+.slot-legend{font-size:11px;color:#8391a7;line-height:1.5;margin:9px 0 2px}.slot-status{color:#4666c5;font-size:11px;font-weight:750;margin:7px 0 0}.booking-error{background:#fff1f2;border:1px solid #ffc6cc;border-radius:12px;color:#b13b4c;font-size:12px;line-height:1.5;padding:10px 12px;margin-top:12px}.booking-error:empty{display:none}
+.hist-date{font-size:10px;color:#7787a2;margin-top:4px}.hist-row{align-items:flex-start}.hist-row .rowdesc{white-space:normal;line-height:1.4}
+.dayempty{padding:19px 8px 22px;text-align:center;color:#8796ad;font-size:12px;line-height:1.5}.dayempty b{color:#3854a6;display:block;margin-bottom:4px;font-size:14px}
+@media(max-width:350px){.day{padding:8px 0}.day .dow{font-size:9px}.day .daynum{font-size:13px}.time-grid{grid-template-columns:repeat(3,1fr)}.date-jump label{display:none}}
+
+
+ /* IMPULSE 7: separate editable per-service and per-booking durations */
+ .price-grid{grid-template-columns:minmax(0,1fr) 87px 72px;gap:7px}
+ .price-grid .service-duration{padding:13px 5px;text-align:center;font-size:14px}
+ .price-grid .service-price{font-size:14px}
+ @media(max-width:355px){.price-grid{grid-template-columns:minmax(0,1fr) 82px}.price-grid .formrow:last-child{grid-column:1 / -1}.price-grid .service-duration{text-align:left;padding-left:13px}}
+ 
+/* IMPULSE 8: encrypted offline backup interface */
+.backup-panel{padding:17px;margin:16px 0 18px}
+.backup-panel h2{margin:0 0 7px;font-size:17px;line-height:1.3}
+.backup-panel p{font-size:12px;line-height:1.55;color:#657493;margin:5px 0 14px}
+.backup-panel .input{font-size:15px}
+.backup-panel input[type=file]{width:100%;max-width:100%;background:#fff;font-size:12px;padding:11px 7px}
+.backup-panel .formrow{margin-top:11px}
+.backup-panel .formrow label{font-size:12px}
+.backup-panel .primary,.backup-panel .secondary{font-size:13px}
+.backup-panel .backup-status{font-size:12px;line-height:1.6;white-space:pre-line;min-height:20px;margin-top:11px;font-weight:700;color:#35558c}
+.backup-panel .backup-status.error{color:#b13b4c}
+.backup-guide{padding:13px 14px;border:1px solid #e1e9f6;background:#f8faff;border-radius:13px;font-size:12px;line-height:1.65;color:#4e6183;margin-top:13px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+ <symbol id="pulse" viewBox="0 0 24 24"><path d="M2 13h4l2.6-6 4.4 11 2.9-6H22"/></symbol>
+ <symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></symbol>
+ <symbol id="chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-8 8 8.5 8.5 0 0 1-4-.9L3 21l1.9-5A8.5 8.5 0 0 1 4 12a8 8 0 1 1 16 0Z"/><path d="M8 12h8"/></symbol>
+ <symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-13 5h3"/></symbol>
+ <symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2zm13-14a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5"/></symbol>
+ <symbol id="spark" viewBox="0 0 24 24"><path d="m12 2 1.9 7.1L21 11l-7.1 1.9L12 20l-1.9-7.1L3 11l7.1-1.9L12 2zm6 15 .7 2.3L21 20l-2.3.7L18 23l-.7-2.3L15 20l2.3-.7L18 17z"/></symbol>
+ <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+ <symbol id="gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+ <symbol id="shield" viewBox="0 0 24 24"><path d="m12 2 8 4v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-4z"/><path d="m8 12 3 3 5-6"/></symbol>
+ </svg>
+<div class="app">
+ <header class="top"><div class="toprow"><div class="brand"><div class="logo"><svg><use href="#pulse"/></svg></div><div><div class="brandname">IMPULSE</div><div class="brandtiny">УМНЫЙ БИЗНЕС-АССИСТЕНТ</div></div></div><button class="round" id="settingsBtn" aria-label="Настройки"><svg><use href="#gear"/></svg></button></div></header>
+ <main>
+ <div class="pane active" id="pane-home"><div class="section"><div class="eyebrow">ДЕМОНСТРАЦИЯ · ВЕРСИЯ 8</div><h1 class="heading">Добро пожаловать 👋</h1><p class="subtitle">Ваш бизнес: <b id="bizCaption">Студия «Виктория»</b></p><span class="demo">ДЕМО-РЕЖИМ · ВСЕ ДАННЫЕ УЧЕБНЫЕ</span>
+ <div class="hero"><div class="tag">✦ ВАШ AI-ПОМОЩНИК</div><div class="spark"><svg><use href="#spark"/></svg></div><h2>Каждое сообщение —<br>новая возможность</h2><p>Поможем отвечать клиентам, вести записи и не терять продажи.</p><button class="herobtn" id="heroTry">Попробовать ИИ <svg><use href="#arrow"/></svg></button></div>
+ <div class="sectiontitle"><h3>Расписание <span id="homeSelectedDate" class="home-date"></span></h3><button class="smalllink" data-go="appointments">Все записи →</button></div><div class="metrics"><div class="metric"><div class="metricicon"><svg><use href="#chat"/></svg></div><div class="metricnum">6</div><div class="metriclabel">Новых<br>сообщений</div></div><div class="metric"><div class="metricicon"><svg><use href="#calendar"/></svg></div><div class="metricnum" id="recordCount">4</div><div class="metriclabel">Записи<br>на выбранный день</div></div><div class="metric"><div class="metricicon"><svg><use href="#people"/></svg></div><div class="metricnum" id="homeClientCount">3</div><div class="metriclabel">Клиентов<br>в демо</div></div></div>
+ <div class="sectiontitle"><h3>ИИ подготовил ответ</h3><button class="smalllink" data-go="chats">Все чаты →</button></div><div class="card chatpeek"><div class="row"><div class="avatar">А</div><div class="rowmain"><p class="rowtitle">Анна Петрова</p><p class="rowdesc">Сколько стоит маникюр?</p></div><span class="greenpill">НОВОЕ</span></div><div class="answer"><div class="answertitle"><svg><use href="#spark"/></svg> ПОДСКАЗКА ИИ</div><p class="answertext">Здравствуйте! 💙 Подскажите, вас интересует маникюр с гель-лаком или без покрытия?</p></div><div class="actions"><button class="primary" id="replyHome">Посмотреть ответ</button><button class="secondary" data-go="chats">Открыть чат</button></div></div>
+ <div class="settings-highlight"><div style="flex:1"><strong>Настроить свой бизнес</strong><p>Название, категория и услуги</p></div><button class="secondary" data-go="business">Бизнес</button><button class="primary" data-go="prices">Цены</button></div><div class="settings-highlight"><div style="flex:1"><strong>🔐 Резервные копии</strong><p>Сохранить записи и настройки в зашифрованный файл</p></div><button class="primary" data-go="backups">Открыть</button></div><div class="statusrow"><div class="wa"><svg><use href="#chat"/></svg></div><div><strong>WhatsApp Business</strong><p>Настоящее подключение ещё не настроено</p></div><span class="soon">Позже</span></div><p class="note">Все данные демонстрационные и хранятся в браузере. В другой версии файла они могут не перенестись. Реальные ИИ и WhatsApp пока не подключены.</p>
+ </div></div>
+ <div class="pane" id="pane-chats"><div class="pagehead"><h1>Переписки</h1><p>Примеры разговоров с клиентами. Нажмите на любой чат, чтобы открыть.</p></div><div class="section"><div class="card listbox"><div class="item" data-chat="anna"><div class="avatar">А</div><div class="rowmain"><p class="rowtitle">Анна Петрова</p><p class="rowdesc">Сколько стоит маникюр?</p></div><span class="unread">1</span></div><div class="item" data-chat="maria"><div class="avatar lilac">М</div><div class="rowmain"><p class="rowtitle">Мария</p><p class="rowdesc">Можно записаться на завтра?</p></div><span class="time">12:10</span></div><div class="item" data-chat="sofia"><div class="avatar mint">С</div><div class="rowmain"><p class="rowtitle">София</p><p class="rowdesc">Спасибо, до встречи!</p></div><span class="time">11:35</span></div></div><p class="note">В демонстрации ответы предлагает локальный сценарий, а не подключённая модель ИИ.</p></div></div>
+ <div class="pane" id="pane-appointments"><div class="pagehead"><h1>Записи</h1><p>Календарь по датам. Выбирай день, смотри свободное время и управляй записями.</p></div><div class="section"><div class="card cal-card">
+ <div class="cal-top"><button class="cal-arrow" id="prevWeek" aria-label="Предыдущая неделя">‹</button><div class="cal-heading" id="weekLabel">Календарь</div><button class="cal-arrow" id="nextWeek" aria-label="Следующая неделя">›</button></div>
+ <div class="week-grid" id="weekGrid" aria-label="Выбор дня"></div>
+ <div class="date-jump"><label for="calendarDate">Перейти к дате</label><input type="date" id="calendarDate" aria-label="Выбрать дату календаря"><button type="button" id="goToday" class="smalllink">Сегодня</button></div>
+ </div>
+ <div class="sectiontitle"><h3 id="scheduleDayTitle">Записи на день</h3><span class="pill" id="dayCount">0</span></div>
+ <div class="card" style="padding:5px 15px" id="scheduleList" aria-live="polite"></div>
+ <button class="primary full" id="addAppointment">+ Добавить запись на выбранный день</button>
+ <p class="note">Демо-график: 09:00–20:00 каждый день. Длительность записи задаётся отдельно, шаг выбора начала — 30 минут. Занятость вычисляется с точностью до минуты. Отменённые записи остаются в истории.</p></div></div>
+ <div class="pane" id="pane-clients"><div class="pagehead"><h1>Клиенты</h1><p>Открой карточку клиента, добавь телефон и заметку, посмотри записи с датами. Данные учебные и хранятся в браузере.</p></div><div class="section"><div class="clientstats"><div class="card"><strong id="clientCount">3</strong><p>Клиентов в демо</p></div><div class="card"><strong id="newClientCount">0</strong><p>Из записей (включая примеры)</p></div></div><div class="card listbox" id="clientList" aria-live="polite"></div></div></div>
+ <div class="pane" id="pane-ai"><div class="pagehead"><h1>AI-помощник</h1><p>Проверяем, как IMPULSE сможет вести разговор и помогать с записью.</p></div><div class="section"><div class="aicard"><div class="tag">✦ ИНТЕЛЛЕКТУАЛЬНЫЙ ПОМОЩНИК</div><h2>Ответ за секунды</h2><p>Пример диалога: клиент спрашивает цену, помощник уточняет услугу и предлагает запись.</p><button class="herobtn" id="aiTry">Запустить пример <svg><use href="#arrow"/></svg></button></div><div class="settings-highlight"><div style="flex:1"><strong>⚙️ Услуги и цены</strong><p>Меняй стоимость сам — ответы в примере обновятся</p></div><button class="primary" data-go="prices">Открыть</button></div><div class="sectiontitle"><h3>Сценарии</h3></div><div class="card scen"><div class="metricicon"><svg><use href="#chat"/></svg></div><div class="rowmain"><strong>Вопрос о цене</strong><p>Уточнить услугу и назвать цену</p></div><button class="smalllink" data-chat="anna">Открыть</button></div><div class="card scen"><div class="metricicon"><svg><use href="#calendar"/></svg></div><div class="rowmain"><strong>Запись клиента</strong><p>Предложить удобное время</p></div><button class="smalllink" data-chat="maria">Открыть</button></div><div class="card scen"><div class="metricicon"><svg><use href="#shield"/></svg></div><div class="rowmain"><strong>Контроль владельца</strong><p>Проверка свободных слотов по демо-календарю</p></div></div><p class="note">Это интерактивный образец поведения. Календарь учебный; настоящие ИИ и WhatsApp пока не подключены.</p></div></div>
+
+ <div class="pane" id="pane-business"><div class="pagehead"><h1>Мой бизнес</h1><p>Настрой пример компании. Работает локально на этом устройстве, без регистрации.</p></div>
+  <div class="section"><div class="card" style="padding:17px">
+  <div class="formrow"><label for="businessName">Название компании</label><input class="input" id="businessName" placeholder="Название бизнеса" maxlength="70"></div>
+  <div class="formrow"><label for="businessType">Сфера бизнеса</label><select class="input" id="businessType"><option value="Салон красоты">Салон красоты</option><option value="Ресторан">Ресторан</option><option value="Магазин">Магазин</option><option value="Услуги">Другие услуги</option></select></div>
+  <button class="primary full" id="saveBusiness">Сохранить настройки</button></div>
+  <div class="settings-highlight"><div style="flex:1"><strong>Услуги и цены</strong><p>Добавляй свои услуги и стоимость</p></div><button class="primary" data-go="prices">Открыть</button></div>
+  <p id="businessStatus" class="note">Учебный сценарий переписки пока показывает салон красоты независимо от выбранной сферы.</p><button class="secondary full" data-go="home">← На главную</button>
+  </div></div>
+
+ <div class="pane" id="pane-prices"><div class="pagehead"><h1>Услуги и цены</h1><p>Задай цены и примерную длительность услуг. После сохранения проверь пример ответа клиенту.</p></div>
+  <div class="section">
+   <div class="pricetip"><b>🧪 Проверь сам</b><br>Цена маникюра с гель-лаком уже <b>170 ₪</b>. Можно менять цену и примерное время услуги. При записи длительность можно уточнить отдельно.</div>
+   <div class="sectiontitle"><h3>Прайс-лист</h3><span class="pill">₪ · шекели</span></div>
+   <div id="serviceList" aria-label="Редактирование услуг"></div>
+   <button class="secondary full" id="addService">+ Добавить услугу</button>
+   <div class="settings-actions"><button class="primary full" id="savePrices">Сохранить цены</button><button class="secondary full" id="testPrices">Проверить ответ ИИ →</button><button class="smalllink" data-go="ai">← Вернуться к ИИ</button></div>
+   <p id="settingsStatus" role="status">Прайс учебный. Реальные клиентские сообщения и WhatsApp не подключены.</p>
+  </div>
+ </div>
+
+ <div class="pane" id="pane-backups"><div class="pagehead"><h1>Защита данных</h1><p>IMPULSE 8.0 · Резервные копии с паролем. Все действия выполняются на телефоне, без сервера.</p></div>
+ <div class="section">
+ <div class="backup-guide"><b>Перед копированием:</b> проверь, что в этой версии видны нужные записи и настройки. В разных файлах Chrome может хранить разные данные. Никакие старые HTML-файлы не удаляются.</div>
+ <div class="card backup-panel">
+ <h2>🔒 Создать резервную копию</h2>
+ <p>Сохраняет уже записанные данные: клиентов, расписание, длительности, прайс-лист и название бизнеса. Пароль нужен для открытия копии.</p>
+ <div class="formrow"><label for="backupNewPassword">Придумай пароль (не менее 10 символов)</label><input class="input" id="backupNewPassword" type="password" minlength="10" maxlength="128" autocomplete="new-password" placeholder="Пароль для копии"></div>
+ <div class="formrow"><label for="backupConfirmPassword">Повтори пароль</label><input class="input" id="backupConfirmPassword" type="password" minlength="10" maxlength="128" autocomplete="new-password" placeholder="Повтори пароль"></div>
+ <button class="primary full" id="createEncryptedBackup" type="button">Создать защищённый файл</button>
+ <div class="backup-status" id="backupCreateStatus" role="status" aria-live="polite"></div>
+ <p>Файл обычно появится в «Мои файлы → Загрузки». Пароль нигде не сохраняется — без него копию не восстановить.</p>
+ </div>
+ <div class="card backup-panel">
+ <h2>🔓 Восстановить из копии</h2>
+ <p>Выбери ранее созданный зашифрованный файл и введи пароль. Перед заменой текущих данных приложение попросит подтверждение.</p>
+ <div class="formrow"><label for="backupRestoreFile">Файл резервной копии</label><input id="backupRestoreFile" class="input" type="file" accept=".impulsebackup,.json,application/json"></div>
+ <div class="formrow"><label for="backupRestorePassword">Пароль от этой копии</label><input id="backupRestorePassword" class="input" type="password" maxlength="128" autocomplete="off" placeholder="Пароль"></div>
+ <button class="secondary full" id="restoreEncryptedBackup" type="button">Проверить и восстановить</button>
+ <div class="backup-status" id="backupRestoreStatus" role="status" aria-live="polite"></div>
+ </div>
+ <p class="note">Защищённый файл содержит только данные. Он не скрывает код самого HTML-приложения. Для настоящих клиентов потребуется отдельная проверка безопасности.</p>
+ <button class="secondary full" data-go="home">← На главную</button>
+ </div></div>
+ </main>
+ <nav class="bottom" aria-label="Основная навигация"><button class="tab active" data-tab="home"><span class="tabicon"><svg><use href="#home"/></svg></span>Главная</button><button class="tab" data-tab="chats"><span class="tabicon"><svg><use href="#chat"/></svg></span>Чаты</button><button class="tab" data-tab="appointments"><span class="tabicon"><svg><use href="#calendar"/></svg></span>Записи</button><button class="tab" data-tab="clients"><span class="tabicon"><svg><use href="#people"/></svg></span>Клиенты</button><button class="tab" data-tab="ai"><span class="tabicon"><svg><use href="#spark"/></svg></span>ИИ</button></nav>
+</div>
+<div class="overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modalbar"><h2 id="modalTitle">Диалог</h2><button class="close" id="closeModal" aria-label="Закрыть">✕</button></div><div id="modalContent"></div></div></div><div class="toast" id="toast" role="status"></div>
+<script>
+(function(){'use strict';
+const modal=document.getElementById('modal'),mt=document.getElementById('modalTitle'),mc=document.getElementById('modalContent');let count=4,stage=0;let timer;
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(s){let el=document.getElementById('toast');el.textContent=s;el.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('show'),2600)}
+function showTab(id){document.querySelectorAll('.pane').forEach(e=>e.classList.toggle('active',e.id==='pane-'+id));document.querySelectorAll('.tab').forEach(e=>{let active=e.dataset.tab===(['prices'].includes(id)?'ai':['business','backups'].includes(id)?'home':id);e.classList.toggle('active',active);e.setAttribute('aria-selected',String(active))});window.scrollTo({top:0,behavior:'instant'});}
+function open(title,html){mt.textContent=title;mc.innerHTML=html;modal.classList.add('open')}
+function close(){modal.classList.remove('open')}
+const DEFAULTS=[{id:'gel',name:'Маникюр с гель-лаком',price:170,duration:60},{id:'plain',name:'Маникюр без покрытия',price:90,duration:60},{id:'pedi',name:'Педикюр',price:180,duration:90}];
+const STORE_KEY='impuls_pricelist_v2', BIZ_KEY='impuls_business_v3', APPOINT_KEY='impuls_appointments_v3';
+let prices=DEFAULTS.map(x=>({...x}));
+let savedLocally=false;
+let business={name:'Студия «Виктория»',type:'Салон красоты'};
+try{const b=JSON.parse(localStorage.getItem(BIZ_KEY)||'null');if(b&&typeof b.name==='string'&&b.name.trim()&&b.name.length<=70&&['Салон красоты','Ресторан','Магазин','Услуги'].includes(b.type)){business=b}}catch(e){}
+let customAppointments=[];
+try{const a=JSON.parse(localStorage.getItem(APPOINT_KEY)||'[]');if(Array.isArray(a)){customAppointments=a.filter(x=>x&&typeof x.name==='string'&&x.name.length<=35&&typeof x.service==='string'&&x.service.length<=70&&/^\d{2}:\d{2}$/.test(x.time)&&typeof x.id==='string').slice(0,100)}}catch(e){}
+function renderBusiness(){document.getElementById('bizCaption').textContent=business.name;document.getElementById('businessName').value=business.name;document.getElementById('businessType').value=business.type}
+function saveBusiness(){const name=document.getElementById('businessName').value.trim(),type=document.getElementById('businessType').value;if(!name){toast('Введи название бизнеса');return}business={name,type};renderBusiness();let ok=false;try{localStorage.setItem(BIZ_KEY,JSON.stringify(business));ok=true}catch(e){};document.getElementById('businessStatus').textContent=ok?'✓ Настройки сохранены на этом устройстве.':'Настройки действуют до закрытия страницы — браузер запретил сохранение.';toast(ok?'Настройки бизнеса сохранены':'Настройки применены временно')}
+ const BASE_APPOINTMENTS=[
+  {id:'seed-maria',time:'10:00',name:'Мария',service:'Маникюр с гель-лаком',status:'Готово'},
+  {id:'seed-sofia',time:'12:30',name:'София',service:'Педикюр',status:'Запись'},
+  {id:'seed-alina',time:'15:00',name:'Алина',service:'Маникюр',status:'Запись'},
+  {id:'seed-anna',time:'17:30',name:'Анна',service:'Гель-лак',status:'Запись'}
+ ];
+ const CLIENT_KEY='impuls_clients_v4',SEED_EDIT_KEY='impuls_seed_edits_v5',PROFILE_KEY='impuls_profiles_v5',V6_STORE='impuls_calendar_v6';
+ const SEED_CLIENTS=[{name:'Анна Петрова',tag:'Новая',info:'Интересуется маникюром',avatar:''},{name:'Мария',tag:'VIP',info:'Постоянный клиент',avatar:'lilac'},{name:'София',tag:'Активная',info:'Пример переписки',avatar:'mint'},{name:'Алина',tag:'Из записи',info:'Маникюр',avatar:'blue'}];
+ const dayNames=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+ function toISO(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+ function parseDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return null;const [y,m,d]=s.split('-').map(Number);const res=new Date(y,m-1,d);return res.getFullYear()===y&&res.getMonth()===m-1&&res.getDate()===d?res:null}
+ function offsetDate(s,n){const dt=parseDate(s);if(!dt)return toISO(new Date());dt.setDate(dt.getDate()+n);return toISO(dt)}
+ function formatDate(s){const dt=parseDate(s);return dt?new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric'}).format(dt):s}
+ function shortDate(s){const dt=parseDate(s);return dt?new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short'}).format(dt):s}
+ function todayLocal(){return toISO(new Date())}
+ function minutes(t){const p=String(t).split(':');return Number(p[0])*60+Number(p[1])}
+ function timeString(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+ function validDuration(n){return Number.isInteger(Number(n))&&Number(n)>=20&&Number(n)<=300&&Number(n)%5===0}
+ function legacyDuration(s){return /педикюр/i.test(s)?90:60}
+ function serviceDuration(s){const p=prices.find(x=>x.name===s);return p&&validDuration(p.duration)?Number(p.duration):legacyDuration(s)}
+ function recordDuration(x){return validDuration(x.duration)?Number(x.duration):legacyDuration(x.service)}
+ let selectedDate=todayLocal(),seedDate=todayLocal(),registeredClients=[],profiles={},seedEdits={},migrationInfo='';
+ try{const a=JSON.parse(localStorage.getItem(CLIENT_KEY)||'[]');if(Array.isArray(a))registeredClients=a.filter(x=>x&&typeof x.name==='string'&&x.name.trim()&&x.name.length<=35&&typeof x.service==='string'&&x.service.length<=70).slice(0,100)}catch(e){}
+ try{const p=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{}');if(p&&typeof p==='object'&&!Array.isArray(p))for(const [k,v] of Object.entries(p)){if(k.length<=45&&v&&typeof v==='object')profiles[k]={phone:typeof v.phone==='string'?v.phone.slice(0,35):'',note:typeof v.note==='string'?v.note.slice(0,400):''}}}catch(e){}
+ function validTime(t){return typeof t==='string'&&/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(t)}
+ function safeRecord(a){if(!a||typeof a!=='object'||typeof a.id!=='string'||a.id.length>80||typeof a.name!=='string'||!a.name.trim()||a.name.length>35||typeof a.service!=='string'||!a.service.trim()||a.service.length>70||!validTime(a.time)||!parseDate(a.date))return null;return {id:a.id,name:a.name,service:a.service,time:a.time,date:a.date,duration:validDuration(a.duration)?Number(a.duration):legacyDuration(a.service),status:['Запись','Готово','Отменена'].includes(a.status)?a.status:'Запись'}}
+ try{
+  const v6=JSON.parse(localStorage.getItem(V6_STORE)||'null');
+  if(v6&&typeof v6==='object'&&parseDate(v6.seedDate)&&Array.isArray(v6.appointments)){
+   seedDate=v6.seedDate; selectedDate=parseDate(v6.selectedDate)?v6.selectedDate:todayLocal();
+   customAppointments=v6.appointments.map(safeRecord).filter(Boolean).slice(0,100);
+   if(v6.seedEdits&&typeof v6.seedEdits==='object')for(const b of BASE_APPOINTMENTS){const e=v6.seedEdits[b.id];if(e&&parseDate(e.date)&&validTime(e.time)&&typeof e.service==='string'&&e.service.length<=70&&['Запись','Готово','Отменена'].includes(e.status))seedEdits[b.id]={date:e.date,time:e.time,service:e.service,duration:validDuration(e.duration)?Number(e.duration):legacyDuration(e.service),status:e.status}}
+  }else{
+   try{const legacy=JSON.parse(localStorage.getItem(SEED_EDIT_KEY)||'{}');for(const b of BASE_APPOINTMENTS){const e=legacy[b.id];if(e&&validTime(e.time)&&typeof e.service==='string'&&e.service.length<=70&&['Запись','Готово','Отменена'].includes(e.status))seedEdits[b.id]={time:e.time,service:e.service,duration:legacyDuration(e.service),status:e.status,date:seedDate}}}catch(e){}
+   customAppointments=customAppointments.map(x=>safeRecord({...x,date:seedDate})).filter(Boolean);
+   if(customAppointments.length)migrationInfo='Ранние записи без даты показаны на демонстрационном дне '+shortDate(seedDate)+'.';
+  }
+ }catch(e){customAppointments=customAppointments.map(x=>safeRecord({...x,date:seedDate})).filter(Boolean)}
+ function sameName(a,b){return String(a).trim().toLocaleLowerCase('ru')===String(b).trim().toLocaleLowerCase('ru')}
+ function canonicalName(name){const n=String(name).trim();return sameName(n,'Анна')?'Анна Петрова':n}
+ function clientKey(name){return canonicalName(name).trim().toLocaleLowerCase('ru')}
+ function registerClient(name,service){name=canonicalName(name);if(SEED_CLIENTS.some(x=>sameName(x.name,name)))return false;const found=registeredClients.find(x=>sameName(x.name,name));if(found){found.service=service;return false}if(registeredClients.length>=100)return false;registeredClients.push({name,service});return true}
+ customAppointments.forEach(x=>registerClient(x.name,x.service));registeredClients=registeredClients.filter(x=>!SEED_CLIENTS.some(s=>sameName(s.name,x.name)));
+ function persistClients(){try{localStorage.setItem(CLIENT_KEY,JSON.stringify(registeredClients));return true}catch(e){return false}}
+ function persistProfiles(){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profiles));return true}catch(e){return false}}
+ function persistCalendar(){try{localStorage.setItem(V6_STORE,JSON.stringify({seedDate,selectedDate,appointments:customAppointments,seedEdits}));return true}catch(e){return false}}
+ function allAppointments(){return [...BASE_APPOINTMENTS.map(x=>({...x,date:seedDate,...(seedEdits[x.id]||{}),seed:true})),...customAppointments.map(x=>({...x,custom:true}))]}
+ function findAppointment(id){return allAppointments().find(x=>x.id===id)}
+ function clientAppointments(name){return allAppointments().filter(x=>sameName(canonicalName(x.name),canonicalName(name))).sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time))}
+ function statusLabel(status){return status==='Отменена'?'Отменена':status==='Готово'?'Готово':'Запись'}
+ function statusClass(status){return status==='Отменена'?'cancelled':status==='Готово'?'done':''}
+ function dayAppointments(date){return allAppointments().filter(x=>x.date===date&&x.status!=='Отменена').sort((a,b)=>a.time.localeCompare(b.time))}
+ function getConflicts(date,time,duration,ignoredId=''){
+  const a=minutes(time),b=a+Number(duration);
+  return dayAppointments(date).filter(x=>x.id!==ignoredId&&a<minutes(x.time)+recordDuration(x)&&b>minutes(x.time));
+ }
+ function available(date,time,duration,ignoredId=''){return Boolean(parseDate(date))&&validTime(time)&&validDuration(duration)&&minutes(time)>=9*60&&minutes(time)+Number(duration)<=20*60&&getConflicts(date,time,duration,ignoredId).length===0}
+ function bookingError(date,time,duration,ignoredId=''){
+  if(!parseDate(date))return 'Выбери правильную дату.';
+  if(!validTime(time))return 'Выбери время.';
+  if(!validDuration(duration))return 'Длительность должна быть от 20 до 300 минут, кратно 5.';
+  if(minutes(time)<9*60||minutes(time)+Number(duration)>20*60)return 'В демо запись доступна с 09:00 до 20:00. Учитываем выбранную длительность.';
+  const existing=getConflicts(date,time,duration,ignoredId);if(existing.length)return 'Это время занято: '+existing.map(x=>x.name+' · '+x.time+'–'+timeString(minutes(x.time)+recordDuration(x))).join(', ')+'. Выбери свободный час.';
+  return '';
+ }
+ function weekDays(){const d=parseDate(selectedDate),offset=(d.getDay()+6)%7;d.setDate(d.getDate()-offset);return Array.from({length:7},(_,i)=>{const x=new Date(d);x.setDate(d.getDate()+i);return toISO(x)})}
+ function renderCalendar(){const week=weekDays();const left=parseDate(week[0]),right=parseDate(week[6]);
+  const leftFmt=new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short'}).format(left),rightFmt=new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short',year:'numeric'}).format(right);
+  document.getElementById('weekLabel').textContent=leftFmt+' — '+rightFmt;
+  document.getElementById('weekGrid').innerHTML=week.map((day,i)=>{const d=parseDate(day),n=dayAppointments(day).length,selected=day===selectedDate;return `<button type="button" class="day ${selected?'selected':''} ${day===todayLocal()?'is-today':''} ${n?'has-bookings':''}" data-day="${day}" aria-pressed="${selected}" aria-label="${escapeHTML(formatDate(day))}, записей: ${n}"><span class="dow">${dayNames[i]}</span><span class="daynum">${d.getDate()}</span><span class="daydot"></span></button>`}).join('');
+  document.getElementById('calendarDate').value=selectedDate;
+ }
+ function renderAppointments(){const host=document.getElementById('scheduleList'),active=dayAppointments(selectedDate);
+  host.innerHTML=active.map(x=>`<div class="sched" data-appt="${escapeHTML(x.id)}" role="button" tabindex="0" aria-label="Открыть запись: ${escapeHTML(x.name)}, ${escapeHTML(x.time)}"><div class="clock">${escapeHTML(x.time)}</div><div class="rowmain"><p class="rowtitle">${escapeHTML(x.name)}</p><p class="rowdesc">${escapeHTML(x.service)} · ${recordDuration(x)} мин · до ${timeString(minutes(x.time)+recordDuration(x))}</p></div><span class="pill ${statusClass(x.status)}">${statusLabel(x.status)}</span><span class="client-arrow" aria-hidden="true">›</span></div>`).join('')||'<div class="dayempty"><b>Свободный день</b>На эту дату в демонстрации пока нет записей.</div>';
+  document.getElementById('recordCount').textContent=String(active.length);
+  document.getElementById('dayCount').textContent=active.length+' запис.';
+  document.getElementById('scheduleDayTitle').textContent='Записи · '+shortDate(selectedDate);
+  document.getElementById('homeSelectedDate').textContent='· '+shortDate(selectedDate);
+  renderCalendar();
+ }
+ function changeDate(date){if(!parseDate(date))return;selectedDate=date;renderAppointments();persistCalendar()}
+ function renderClients(){const host=document.getElementById('clientList'),names=[...SEED_CLIENTS,...registeredClients.map(x=>({name:x.name,tag:'Из записи',info:x.service,avatar:'blue'}))];
+  host.innerHTML=names.map(x=>{const appts=clientAppointments(x.name),last=appts[0],subtitle=last?`${appts.length} запис. · ${last.service}`:x.info;return `<div class="item" data-client="${escapeHTML(x.name)}" role="button" tabindex="0" aria-label="Открыть карточку клиента ${escapeHTML(x.name)}"><div class="avatar ${escapeHTML(x.avatar)}">${escapeHTML(x.name.trim().charAt(0).toUpperCase())}</div><div class="rowmain"><p class="rowtitle">${escapeHTML(x.name)}</p><p class="rowdesc">${escapeHTML(subtitle)}</p></div><span class="pill">${escapeHTML(x.tag)}</span><span class="client-arrow" aria-hidden="true">›</span></div>`}).join('');
+  document.getElementById('clientCount').textContent=String(names.length);document.getElementById('homeClientCount').textContent=String(names.length);document.getElementById('newClientCount').textContent=String(1+registeredClients.length)
+ }
+ function properCount(n){const d=n%10,dd=n%100;return n+' '+(dd>=11&&dd<=14?'записей':d===1?'запись':d>=2&&d<=4?'записи':'записей')}
+ function appointmentHistoryHTML(name){const arr=clientAppointments(name);return `<div class="sectiontitle"><h3>История записей</h3><span class="pill">${properCount(arr.length)}</span></div><div class="hist">${arr.length?arr.map(x=>`<div class="hist-row"><div class="hist-time">${escapeHTML(x.time)}</div><div class="rowmain"><p class="rowtitle">${escapeHTML(x.service)}</p><p class="rowdesc">${escapeHTML(formatDate(x.date))} · ${recordDuration(x)} мин</p></div><span class="pill ${statusClass(x.status)}">${statusLabel(x.status)}</span><button class="smalllink" data-appt="${escapeHTML(x.id)}" aria-label="Изменить запись">›</button></div>`).join(''):'<p class="client-card-supp">Пока нет записей.</p>'}</div>`}
+ function clientCard(name){name=canonicalName(name);const profile=profiles[clientKey(name)]||{phone:'',note:''};const chats={'Анна Петрова':'В демо: вопрос о стоимости маникюра.','Мария':'В демо: вопрос о записи на завтра.','София':'В демо: благодарность после общения.'};
+  open(name+' · Карточка клиента',`<div class="recordmeta"><span class="pill">CRM · демо</span><span class="pill">${properCount(clientAppointments(name).length)}</span></div><div class="formrow"><label for="clientPhone">Телефон (необязательно)</label><input class="input" id="clientPhone" type="tel" maxlength="35" autocomplete="tel" placeholder="Например, 050-123-4567" value="${escapeHTML(profile.phone)}"></div><div class="formrow"><label for="clientNote">Заметки владельца</label><textarea class="input" id="clientNote" maxlength="400" placeholder="Пожелания, детали услуги">${escapeHTML(profile.note)}</textarea></div><button class="primary full" id="saveClientProfile" data-name="${escapeHTML(name)}">Сохранить карточку</button><p class="inputhelp">Данные сохраняются в браузере. Не вводи настоящие личные данные в демонстрацию.</p>${appointmentHistoryHTML(name)}<div class="sectiontitle"><h3>История переписки</h3></div><p class="client-card-supp">${escapeHTML(chats[name]||'Нет подключённой переписки.')} Реальный WhatsApp ещё не подключён.</p>`)
+ }
+ function saveClientProfile(btn){const name=btn.dataset.name,phone=document.getElementById('clientPhone').value.trim(),note=document.getElementById('clientNote').value.trim();profiles[clientKey(name)]={phone,note};const ok=persistProfiles();toast(ok?'Карточка сохранена':'Изменения временные — браузер не сохранил данные')}
+ function serviceOptions(value){const options=prices.some(p=>p.name===value)?prices:[...prices,{id:'legacy',name:value,price:0}];return options.map(p=>`<option value="${escapeHTML(p.name)}" ${p.name===value?'selected':''}>${escapeHTML(p.name)}</option>`).join('')}
+ function timeOptionsHTML(mode,date,duration,ownId='',chosen=''){
+  const html=[];let free=0;
+  if(!validDuration(duration))return {html:'',free:0};
+  for(let min=9*60;min<=20*60-Number(duration);min+=30){const time=timeString(min),ok=available(date,time,duration,ownId);if(ok)free++;html.push(`<button type="button" class="time-option ${chosen===time?'chosen':''}" data-time-slot="${time}" data-mode="${mode}" ${ok?'':'disabled'} aria-label="${time}${ok?', свободно':', занято'}" aria-pressed="${chosen===time}">${time}</button>`)}
+  return {html:html.join(''),free};
+ }
+ function refreshSlots(mode){const isNew=mode==='new',dateEl=document.getElementById(isNew?'newDate':'editDate'),timeEl=document.getElementById(isNew?'newTime':'editTime'),durationEl=document.getElementById(isNew?'newDuration':'editDuration'),out=document.getElementById(isNew?'newSlots':'editSlots');if(!durationEl||!dateEl||!timeEl||!out)return;
+  const id=isNew?'':document.querySelector('[data-save-appt]')?.dataset.saveAppt||'';
+  const duration=Number(durationEl.value),{html,free}=timeOptionsHTML(mode,dateEl.value,duration,id,timeEl.value);
+  out.innerHTML=html;
+  const label=document.getElementById(isNew?'newSlotsStatus':'editSlotsStatus');if(label)label.textContent=validDuration(duration)?`Свободно: ${free} вариантов начала с шагом 30 минут · резерв ${duration} мин`:'Выбери длительность от 20 до 300 минут, кратно 5.';
+  const msg=document.getElementById('bookingError');if(msg)msg.textContent='';
+ }
+ function appointmentEditor(id){const x=findAppointment(id);if(!x){toast('Запись не найдена');return}open('Запись · '+canonicalName(x.name),`<div class="recordmeta"><span class="pill">${escapeHTML(canonicalName(x.name))}</span><span class="pill ${statusClass(x.status)}">${statusLabel(x.status)}</span></div><div class="formrow"><label for="editDate">Дата</label><input class="input" type="date" id="editDate" required value="${escapeHTML(x.date)}"></div><div class="formrow"><label for="editService">Услуга</label><select class="input" id="editService">${serviceOptions(x.service)}</select></div><div class="formrow"><label for="editDuration">Резерв времени, минут</label><input class="input" type="number" inputmode="numeric" min="20" max="300" step="5" id="editDuration" value="${recordDuration(x)}" required><p class="inputhelp">Можно изменить: 45, 60, 70, 90 минут и т. д. Это время для календаря.</p></div><div class="formrow"><label for="editTime">Время</label><input class="input" type="time" step="900" id="editTime" value="${escapeHTML(x.time)}" required></div><div class="availability-label">Или выбери свободное время</div><div id="editSlots" class="time-grid"></div><p class="slot-status" id="editSlotsStatus"></p><p class="slot-legend">Перечёркнутые часы уже заняты. Демо-график: 09:00–20:00.</p><div id="bookingError" class="booking-error" role="alert"></div><button class="primary full" data-save-appt="${escapeHTML(id)}">Сохранить изменения</button><div class="modal-actions"><button class="secondary" data-client="${escapeHTML(canonicalName(x.name))}">Карточка клиента</button>${x.status==='Отменена'?`<button class="secondary" data-restore-appt="${escapeHTML(id)}">Восстановить</button>`:`<button class="danger" data-confirm-cancel="${escapeHTML(id)}">Отменить запись</button>`}</div><p class="inputhelp">Учебный календарь. Настоящему клиенту ничего не отправляется.</p>`);refreshSlots('edit')}
+ function editStoredAppointment(id,changes){const old=findAppointment(id);if(!old)return false;if(old.seed){seedEdits[id]={date:changes.date,time:changes.time,service:changes.service,duration:changes.duration,status:changes.status};return persistCalendar()}const record=customAppointments.find(x=>x.id===id);if(!record)return false;Object.assign(record,changes);return persistCalendar()}
+ function showBookingError(message){const el=document.getElementById('bookingError');if(el)el.textContent=message;toast(message)}
+ function saveEditedAppointment(btn){const x=findAppointment(btn.dataset.saveAppt),date=document.getElementById('editDate').value,time=document.getElementById('editTime').value,service=document.getElementById('editService').value,duration=Number(document.getElementById('editDuration').value);if(!x)return;
+  const err=x.status==='Отменена'?(parseDate(date)&&validTime(time)&&validDuration(duration)?'':'Проверь дату, время и длительность.'):bookingError(date,time,duration,x.id);if(err){showBookingError(err);return}
+  const ok=editStoredAppointment(x.id,{date,time,service,duration,status:x.status});if(x.custom)registerClient(x.name,service);persistClients();renderAppointments();renderClients();appointmentEditor(x.id);toast(ok?'Запись обновлена':'Обновлено временно; браузер не разрешил сохранение')}
+ function confirmCancel(id){const x=findAppointment(id);if(!x)return;const existing=document.getElementById('cancelConfirm');if(existing)return;const box=document.createElement('div');box.id='cancelConfirm';box.className='alertbox';box.innerHTML=`Отменить запись «${escapeHTML(x.service)}» на ${escapeHTML(formatDate(x.date))}, ${escapeHTML(x.time)}? Она останется в истории клиента.<button class="danger full" data-cancel-appt="${escapeHTML(id)}">Да, отменить запись</button>`;mc.appendChild(box);box.scrollIntoView({block:'nearest'})}
+ function changeStatus(id,status){const x=findAppointment(id);if(!x)return;if(status==='Запись'){const err=bookingError(x.date,x.time,recordDuration(x),x.id);if(err){showBookingError('Нельзя восстановить: '+err);return}}
+  const ok=editStoredAppointment(id,{date:x.date,time:x.time,service:x.service,duration:recordDuration(x),status});renderAppointments();renderClients();appointmentEditor(id);toast(ok?(status==='Отменена'?'Запись отменена, история сохранена':'Запись восстановлена'):'Изменено временно; браузер запретил сохранение')}
+ function add(){let service=prices[0]?.name||'Маникюр с гель-лаком';let date=selectedDate;let duration=serviceDuration(service),proposed='14:00';if(!available(date,proposed,duration)){const all=timeOptionsHTML('new',date,duration);const m=all.html.match(/data-time-slot="([0-9:]+)" data-mode="new"  aria-label/);proposed=m?m[1]:''}
+  open('Добавить пробную запись',`<div class="formrow"><label for="cust">Имя клиента</label><input class="input" id="cust" placeholder="Например, Елена" maxlength="35" autocomplete="off"></div><div class="formrow"><label for="newDate">Дата</label><input class="input" type="date" id="newDate" required value="${escapeHTML(date)}"></div><div class="formrow"><label for="service">Услуга</label><select class="input" id="service">${prices.map(s=>`<option value="${escapeHTML(s.name)}">${escapeHTML(s.name)}</option>`).join('')}</select></div><div class="formrow"><label for="newDuration">Резерв времени, минут</label><input class="input" type="number" inputmode="numeric" min="20" max="300" step="5" id="newDuration" value="${duration}" required><p class="inputhelp">Это примерное время для календаря. Можно поставить, например, 70 минут.</p></div><div class="formrow"><label for="newTime">Время</label><input class="input" type="time" step="900" id="newTime" value="${proposed}" required></div><div class="availability-label">Свободное время на выбранный день</div><div class="time-grid" id="newSlots"></div><p class="slot-status" id="newSlotsStatus"></p><p class="slot-legend">Занятые часы перечёркнуты. Проверка по местным демо-записям, не по реальному календарю бизнеса.</p><div id="bookingError" class="booking-error" role="alert"></div><button class="primary full" id="saveAppointment">Добавить в демо</button>`);refreshSlots('new')}
+ function addAppointmentFromModal(){const input=document.getElementById('cust');const name=input.value.trim();if(!name){showBookingError('Напиши имя клиента.');input.focus();return}
+  const service=document.getElementById('service').value,date=document.getElementById('newDate').value,time=document.getElementById('newTime').value,duration=Number(document.getElementById('newDuration').value),err=bookingError(date,time,duration);if(err){showBookingError(err);return}
+  if(customAppointments.length>=100){showBookingError('Достигнут лимит пробных записей');return}
+  customAppointments.push({id:'a'+Date.now()+'-'+Math.floor(Math.random()*100000),name,service,time,date,duration,status:'Запись'});registerClient(name,service);
+  selectedDate=date;const ok=persistCalendar()&&persistClients();renderAppointments();renderClients();close();showTab('appointments');toast(ok?'Запись сохранена, клиент добавлен в CRM':'Запись добавлена, но браузер не разрешил сохранить всё')}
+ renderBusiness();renderAppointments();renderClients();persistClients();persistCalendar();if(migrationInfo){document.querySelector('#pane-appointments .note').textContent+=' '+migrationInfo}
+try{const raw=localStorage.getItem(STORE_KEY);if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length>0&&arr.length<=30&&arr.every(x=>x&&typeof x.name==='string'&&x.name.trim().length>0&&Number.isFinite(+x.price)&&+x.price>=0&&+x.price<=100000)){prices=arr.map(x=>({id:String(x.id||''),name:x.name.slice(0,70),price:Number(x.price),duration:validDuration(x.duration)?Number(x.duration):legacyDuration(x.name)}));savedLocally=true}}}catch(e){}
+function baseGel(){return prices.find(x=>x.id==='gel')||DEFAULTS[0]}
+function renderPrices(){const target=document.getElementById('serviceList');target.innerHTML=prices.map((p,i)=>`<div class="price-row" data-price-row="${i}"><div class="price-grid"><div class="formrow"><label for="serviceName${i}">Услуга ${i+1}</label><input class="input service-name" id="serviceName${i}" value="${escapeHTML(p.name)}" maxlength="70" autocomplete="off"></div><div class="formrow"><label for="servicePrice${i}">Цена</label><div class="price-input-wrap"><input class="input service-price" id="servicePrice${i}" type="number" min="0" max="100000" step="1" inputmode="numeric" value="${p.price}"><span>₪</span></div></div><div class="formrow"><label for="serviceDuration${i}">Минут</label><input class="input service-duration" id="serviceDuration${i}" type="number" min="20" max="300" step="5" inputmode="numeric" value="${serviceDuration(p.name)}"></div></div>${i>=3?`<button class="del" data-remove-service="${i}">Удалить услугу</button>`:''}</div>`).join('');
+ document.getElementById('settingsStatus').textContent=savedLocally?'Сохранённые ранее цены загружены с этого устройства. Для изменений нажми «Сохранить цены».':'Показаны учебные цены. Нажми «Сохранить цены», чтобы сохранить изменения на устройстве.'}
+function collectPrices(){let result=[];for(let i=0;i<document.querySelectorAll('[data-price-row]').length;i++){const el=document.querySelector(`[data-price-row="${i}"]`);if(!el)continue;const name=el.querySelector('.service-name').value.trim(),input=el.querySelector('.service-price'),num=Number(input.value),durationInput=el.querySelector('.service-duration'),duration=Number(durationInput.value);if(!name){toast('Введи название услуги №'+(i+1));el.querySelector('.service-name').focus();return null}if(!input.value.trim()||!Number.isFinite(num)||num<0||num>100000||!Number.isInteger(num)){toast('Укажи цену целым числом от 0 до 100 000');input.focus();return null}if(!durationInput.value.trim()||!validDuration(duration)){toast('Укажи длительность от 20 до 300 минут, кратно 5');durationInput.focus();return null}result.push({id:prices[i].id,name,price:num,duration})}return result}
+function savePrices(){const next=collectPrices();if(!next)return false;prices=next;let persisted=false;try{localStorage.setItem(STORE_KEY,JSON.stringify(prices));persisted=true}catch(e){}savedLocally=persisted;document.getElementById('settingsStatus').textContent=persisted?'✓ Цены сохранены на этом устройстве в браузере. Теперь проверь ответ клиента.':'✓ Цены применены на время этого открытия. Браузер не разрешил сохранить их надолго.';toast(persisted?'Прайс сохранён!':'Цены применены до закрытия страницы');return true}
+function addNewService(){const cur=collectPrices();if(!cur)return;if(cur.length>=25){toast('В демо можно добавить до 25 услуг');return}prices=cur;prices.push({id:'new-'+Date.now(),name:'Новая услуга',price:100,duration:60});renderPrices();const el=document.getElementById('serviceName'+(prices.length-1));el.focus();el.select()}
+function removeService(idx){const cur=collectPrices();if(!cur)return;if(idx<3)return;prices=cur.filter((_,i)=>i!==idx);renderPrices();toast('Услуга убрана. Сохрани изменения.')}
+function openPriceSettings(){close();renderPrices();showTab('prices')}
+function priceTest(){const s=baseGel();open('Проверка цены · Демо',`<div class="bubble in"><b>КЛИЕНТ · АННА</b>Сколько стоит маникюр с гель-лаком?</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ · ПРИМЕР</b>${escapeHTML(s.name)} — <strong>${s.price} ₪</strong>. Хотите записаться? Подскажите удобный день и время.</div><p class="modalfoot">Цена взята из настроенного прайса. Это локальный сценарий, не настоящий ИИ и не сообщение в WhatsApp.</p><button class="secondary full" id="editPricesAgain">← Исправить цену</button>`)}
+function anna(){stage=0;open('Анна · Пример переписки', `<div class="bubble in"><b>КЛИЕНТ · АННА</b>Здравствуйте! Сколько стоит маникюр?</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ</b>Здравствуйте! 💙 Подскажите, вас интересует маникюр с гель-лаком или без покрытия?</div><button class="primary full" id="nextA">Клиент выбирает «С гель-лаком»</button><p class="modalfoot">Это учебная переписка. Сообщения не отправляются в WhatsApp.</p>`)}
+function maria(){open('Мария · Пример записи',`<div class="bubble in"><b>КЛИЕНТ · МАРИЯ</b>Добрый день! Можно записаться на завтра?</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ</b>Здравствуйте! Подскажите, пожалуйста, какую услугу вы хотите и какое время вам удобно? Я проверю доступные записи.</div><p class="modalfoot">Проверь свободные часы в учебном календаре. Реальный календарь бизнеса пока не подключён.</p><button class="secondary full" id="checkCalendar">Посмотреть пример календаря</button>`)}
+function sofia(){open('София · Пример переписки',`<div class="bubble in"><b>КЛИЕНТ · СОФИЯ</b>Спасибо, до встречи!</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ</b>Спасибо! Будем рады видеть вас в студии. Хорошего дня 💙</div><p class="modalfoot">Только демонстрация — реальных сообщений нет.</p>`)}
+function settings(){open('О приложении',`<div class="card" style="padding:16px"><b>IMPULSE · Демоверсия 8.0</b><p class="tiny">Бизнес: демонстрационные настройки<br>Язык: русский</p><p class="tiny"><strong>Сейчас:</strong> интерактивный пример без сервера и интернета.<br><strong>Потом:</strong> регистрация, AI API, WhatsApp Business Platform, защищённое хранение клиентов, запись и аналитика.</p></div><button class="primary full" id="resetDemo">Вернуться на главный экран</button>`)}
+
+// IMPULSE 8: all cryptography is on-device; no server and no plaintext export.
+const BACKUP_FORMAT='IMPULSE_ENCRYPTED_BACKUP';
+const BACKUP_KEYS=[V6_STORE,CLIENT_KEY,PROFILE_KEY,STORE_KEY,BIZ_KEY];
+const BACKUP_ITERATIONS=260000;
+const B_ENCODER=new TextEncoder(),B_DECODER=new TextDecoder('utf-8',{fatal:true});
+function backupStatus(id,message,isError=false){const el=document.getElementById(id);if(el){el.textContent=message;el.classList.toggle('error',!!isError)} }
+function backupCryptoReady(){return !!(globalThis.crypto&&crypto.subtle&&crypto.getRandomValues&&globalThis.TextEncoder&&globalThis.TextDecoder)}
+function backupToB64(bytes){let out='';for(let i=0;i<bytes.length;i+=8192)out+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(out)}
+function backupFromB64(s){if(typeof s!=='string'||s.length>4500000||!/^[-A-Za-z0-9+/=]+$/.test(s))throw new Error('Неправильный формат зашифрованного файла');const bin=atob(s);return Uint8Array.from(bin,c=>c.charCodeAt(0))}
+async function backupKey(password,salt,iterations){const root=await crypto.subtle.importKey('raw',B_ENCODER.encode(password),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations},root,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+function readBackupSnapshot(){
+ const stores={};for(const key of BACKUP_KEYS){stores[key]=localStorage.getItem(key)}
+ return {kind:'IMPULSE_DATA',schema:1,created:new Date().toISOString(),sourceVersion:'8.0',stores};
+}
+function plainObject(v){return !!v&&typeof v==='object'&&!Array.isArray(v)}
+function validateBackupSnapshot(data){
+ if(!plainObject(data)||data.kind!=='IMPULSE_DATA'||data.schema!==1||!plainObject(data.stores))throw new Error('В копии нет данных IMPULSE');
+ const stores=data.stores;
+ if(Object.keys(stores).length!==BACKUP_KEYS.length||!BACKUP_KEYS.every(k=>Object.hasOwn(stores,k)))throw new Error('В файле неполный набор данных');
+ let calendar;
+ for(const key of BACKUP_KEYS){
+  const s=stores[key];if(s===null)continue;
+  if(typeof s!=='string'||s.length>1600000)throw new Error('Повреждены данные в копии');
+  let obj;try{obj=JSON.parse(s)}catch(e){throw new Error('Ошибка формата данных в копии')}
+  if(key===V6_STORE){
+   if(!plainObject(obj)||!parseDate(obj.seedDate)||!parseDate(obj.selectedDate)||!Array.isArray(obj.appointments)||obj.appointments.length>100||!plainObject(obj.seedEdits))throw new Error('Неверный формат календаря');
+   if(!obj.appointments.every(x=>!!safeRecord(x)))throw new Error('Повреждены записи календаря');
+   if(Object.keys(obj.seedEdits).length>4||!Object.entries(obj.seedEdits).every(([id,x])=>BASE_APPOINTMENTS.some(z=>z.id===id)&&plainObject(x)&&parseDate(x.date)&&validTime(x.time)&&typeof x.service==='string'&&x.service.length<=70&&['Запись','Готово','Отменена'].includes(x.status)))throw new Error('Повреждены изменения календаря');
+   calendar=obj;
+  }else if(key===CLIENT_KEY){
+   if(!Array.isArray(obj)||obj.length>100||!obj.every(x=>plainObject(x)&&typeof x.name==='string'&&x.name.length<=35&&typeof x.service==='string'&&x.service.length<=70))throw new Error('Неверный список клиентов');
+  }else if(key===PROFILE_KEY){
+   if(!plainObject(obj)||Object.keys(obj).length>110||!Object.entries(obj).every(([k,v])=>k.length<=45&&plainObject(v)&&typeof v.phone==='string'&&v.phone.length<=35&&typeof v.note==='string'&&v.note.length<=400))throw new Error('Повреждены карточки клиентов');
+  }else if(key===STORE_KEY){
+   if(!Array.isArray(obj)||obj.length>30||!obj.every(x=>plainObject(x)&&typeof x.name==='string'&&x.name.trim().length>0&&x.name.length<=70&&Number.isFinite(+x.price)&&+x.price>=0&&+x.price<=100000&&(!Object.hasOwn(x,'duration')||validDuration(x.duration))))throw new Error('Повреждён прайс-лист');
+  }else if(key===BIZ_KEY){
+   if(!plainObject(obj)||typeof obj.name!=='string'||!obj.name.trim()||obj.name.length>70||!['Салон красоты','Ресторан','Магазин','Услуги'].includes(obj.type))throw new Error('Повреждены настройки бизнеса');
+  }
+ }
+ return {appointments:calendar?.appointments?.length||0,store:stores};
+}
+async function createEncryptedBackup(){
+ const id='backupCreateStatus';backupStatus(id,'');
+ const password=document.getElementById('backupNewPassword').value;
+ const second=document.getElementById('backupConfirmPassword').value;
+ if(password.length<10){backupStatus(id,'Придумай пароль минимум из 10 символов.',true);return}
+ if(password!==second){backupStatus(id,'Пароли не совпадают. Проверь ещё раз.',true);return}
+ if(!backupCryptoReady()){backupStatus(id,'Этот способ открытия файла не поддерживает шифрование. Нельзя безопасно создавать копию здесь. Попробуй другой способ открыть файл в Chrome.',true);return}
+ const button=document.getElementById('createEncryptedBackup');button.disabled=true;backupStatus(id,'Шифрую данные на телефоне…');
+ try{
+  const snapshot=readBackupSnapshot();validateBackupSnapshot(snapshot);
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+  const key=await backupKey(password,salt,BACKUP_ITERATIONS);
+  const encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,B_ENCODER.encode(JSON.stringify(snapshot)));
+  const envelope={kind:BACKUP_FORMAT,schema:1,kdf:'PBKDF2-SHA256',iterations:BACKUP_ITERATIONS,cipher:'AES-256-GCM',salt:backupToB64(salt),iv:backupToB64(iv),payload:backupToB64(new Uint8Array(encrypted))};
+  const blob=new Blob([JSON.stringify(envelope)],{type:'application/octet-stream'});
+  const now=new Date(),stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'_'+String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0');
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='IMPULSE_backup_'+stamp+'.impulsebackup';a.style.display='none';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  document.getElementById('backupNewPassword').value='';document.getElementById('backupConfirmPassword').value='';
+  backupStatus(id,'Зашифрованный файл подготовлен. Подтверди загрузку, если Chrome спросит. Проверь его в «Мои файлы → Загрузки».');
+ }catch(e){backupStatus(id,'Не удалось создать копию: '+(e?.message||'неизвестная ошибка'),true)}
+ finally{button.disabled=false}
+}
+async function restoreEncryptedBackup(){
+ const id='backupRestoreStatus';backupStatus(id,'');
+ const input=document.getElementById('backupRestoreFile'),file=input.files?.[0],password=document.getElementById('backupRestorePassword').value;
+ if(!file){backupStatus(id,'Сначала выбери файл резервной копии.',true);return}
+ if(!password){backupStatus(id,'Введи пароль от копии.',true);return}
+ if(file.size>4000000){backupStatus(id,'Файл слишком большой — это не резервная копия IMPULSE.',true);return}
+ if(!backupCryptoReady()){backupStatus(id,'В этом режиме браузер не поддерживает расшифровку. Данные не изменены.',true);return}
+ const button=document.getElementById('restoreEncryptedBackup');button.disabled=true;backupStatus(id,'Проверяю копию и пароль…');
+ try{
+  let envelope;try{envelope=JSON.parse(await file.text())}catch(e){throw new Error('Файл не является резервной копией IMPULSE')}
+  if(!plainObject(envelope)||envelope.kind!==BACKUP_FORMAT||envelope.schema!==1||envelope.kdf!=='PBKDF2-SHA256'||envelope.cipher!=='AES-256-GCM'||!Number.isInteger(envelope.iterations)||envelope.iterations<150000||envelope.iterations>600000)throw new Error('Неподдерживаемый формат защищённого файла');
+  const salt=backupFromB64(envelope.salt),iv=backupFromB64(envelope.iv),enc=backupFromB64(envelope.payload);
+  if(salt.length!==16||iv.length!==12||enc.length<16)throw new Error('Повреждён зашифрованный файл');
+  const key=await backupKey(password,salt,envelope.iterations);
+  let plain;
+  try{plain=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,enc)}catch(e){throw new Error('Неверный пароль или повреждённый файл')}
+  let data;try{data=JSON.parse(B_DECODER.decode(plain))}catch(e){throw new Error('Повреждены данные копии')}
+  const details=validateBackupSnapshot(data);
+  if(!confirm('Восстановление заменит ТЕКУЩИЕ записи и настройки в этом браузере данными из копии. Старые HTML-файлы не удаляются. Продолжить?')){backupStatus(id,'Восстановление отменено. Ничего не изменилось.');return}
+  const previous={};for(const k of BACKUP_KEYS)previous[k]=localStorage.getItem(k);
+  try{
+   for(const k of BACKUP_KEYS){const value=details.store[k];if(value===null)localStorage.removeItem(k);else localStorage.setItem(k,value)}
+  }catch(e){for(const k of BACKUP_KEYS){try{if(previous[k]===null)localStorage.removeItem(k);else localStorage.setItem(k,previous[k])}catch(_){}}throw new Error('Браузер не разрешил сохранить данные. Проверь свободную память телефона')}
+  document.getElementById('backupRestorePassword').value='';input.value='';
+  backupStatus(id,'Данные восстановлены. Обновляю приложение…');
+  setTimeout(()=>location.reload(),800);
+ }catch(e){backupStatus(id,'Восстановление не выполнено: '+(e?.message||'неизвестная ошибка')+'. Текущие записи не изменены.',true)}
+ finally{button.disabled=false}
+}
+
+document.addEventListener('click',function(e){
+ const day=e.target.closest('[data-day]');if(day){changeDate(day.dataset.day);return}
+ const slot=e.target.closest('[data-time-slot]');if(slot&&!slot.disabled){const t=document.getElementById(slot.dataset.mode==='new'?'newTime':'editTime');if(t){t.value=slot.dataset.timeSlot;refreshSlots(slot.dataset.mode)}return}
+ const saveAppt=e.target.closest('[data-save-appt]');if(saveAppt){saveEditedAppointment(saveAppt);return}
+ const cancel=e.target.closest('[data-cancel-appt]');if(cancel){changeStatus(cancel.dataset.cancelAppt,'Отменена');return}
+ const ask=e.target.closest('[data-confirm-cancel]');if(ask){confirmCancel(ask.dataset.confirmCancel);return}
+ const restore=e.target.closest('[data-restore-appt]');if(restore){changeStatus(restore.dataset.restoreAppt,'Запись');return}
+ const appt=e.target.closest('[data-appt]');if(appt){appointmentEditor(appt.dataset.appt);return}
+ const client=e.target.closest('[data-client]');if(client){clientCard(client.dataset.client);return}
+ const rm=e.target.closest('[data-remove-service]');if(rm){removeService(Number(rm.dataset.removeService));return}
+ const tab=e.target.closest('[data-tab]'),go=e.target.closest('[data-go]'),ch=e.target.closest('[data-chat]');
+ if(tab){close();showTab(tab.dataset.tab);return}if(go){if(go.dataset.go==='prices'){openPriceSettings()}else{close();showTab(go.dataset.go)}return}if(ch){({anna,maria,sofia}[ch.dataset.chat]||anna)();return}
+ const btn=e.target.closest('button');if(!btn)return;switch(btn.id){
+ case'heroTry':case'aiTry':case'replyHome':anna();break;
+ case'settingsBtn':renderBusiness();showTab('business');break;
+ case'saveBusiness':saveBusiness();break;
+ case'addService':addNewService();break;
+ case'savePrices':savePrices();break;
+ case'testPrices':if(savePrices())priceTest();break;
+ case'editPricesAgain':openPriceSettings();break;
+ case'closeModal':close();break;
+ case'saveClientProfile':saveClientProfile(btn);break;
+ case'nextA':mc.innerHTML=`<div class="bubble in"><b>КЛИЕНТ · АННА</b>Сколько стоит маникюр?</div><div class="bubble out"><b>ПРЕДЛОЖЕНИЕ ИИ</b>Здравствуйте! 💙 Подскажите, вас интересует маникюр с гель-лаком или без покрытия?</div><div class="bubble in"><b>КЛИЕНТ · АННА</b>С гель-лаком.</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ</b>${escapeHTML(baseGel().name)} — ${baseGel().price} ₪ (из вашего прайса). Хотите записаться? Какой день и время вам удобны?</div><button class="primary full" id="nextB">Клиент хочет записаться</button><p class="modalfoot">Цену можно изменить в разделе «ИИ → Услуги и цены». Данные учебные, сообщения не отправляются.</p>`;break;
+ case'nextB':mc.innerHTML+=`<div class="bubble in"><b>КЛИЕНТ · АННА</b>Да, хочу завтра вечером.</div><div class="bubble ai"><b>✦ ПРЕДЛОЖЕНИЕ ИИ</b>Отлично! Сейчас можем открыть учебное расписание и посмотреть свободные часы. Для реальной записи потребуется подтверждение владельца.</div><p class="modalfoot">Проверка времени работает внутри учебного календаря. Реальный календарь бизнеса пока не подключён.</p>`;btn.disabled=true;btn.textContent='Сценарий просмотрен';break;
+ case'checkCalendar':close();showTab('appointments');break;
+ case'addAppointment':add();break;
+ case'prevWeek':changeDate(offsetDate(selectedDate,-7));break;
+ case'nextWeek':changeDate(offsetDate(selectedDate,7));break;
+ case'goToday':changeDate(todayLocal());break;
+ case'saveAppointment':addAppointmentFromModal();break;
+ case'createEncryptedBackup':createEncryptedBackup();break;
+ case'restoreEncryptedBackup':restoreEncryptedBackup();break;
+ case'resetDemo':close();showTab('home');break;
+ }
+});
+document.addEventListener('change',e=>{if(e.target.id==='calendarDate'){changeDate(e.target.value);return}if(e.target.id==='service'){document.getElementById('newDuration').value=serviceDuration(e.target.value)}if(e.target.id==='editService'){document.getElementById('editDuration').value=serviceDuration(e.target.value)}if(e.target.matches('#newDate,#service,#newDuration'))refreshSlots('new');if(e.target.matches('#editDate,#editService,#editDuration'))refreshSlots('edit')});
+document.addEventListener('input',e=>{if(e.target.matches('#newTime,#newDuration'))refreshSlots('new');if(e.target.matches('#editTime,#editDuration'))refreshSlots('edit')});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('button')&&e.target.matches('[data-client],[data-appt]')){e.preventDefault();e.target.click()}});
+modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
+</script>
+</body></html>
